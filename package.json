@@ -1,0 +1,32 @@
+{
+  "name": "cloud-logger",
+  "version": "0.0.1",
+  "description": "Send and save your logs in cloud.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.2.4"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamryvola/cloud-logger.git"
+  },
+  "keywords": [
+    "logs",
+    "logger",
+    "cloud-log",
+    "cloud-logger"
+  ],
+  "author": "Adam Ryvola <ryvolaadam@gmail.com> (http://www.adane.cz)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/adamryvola/cloud-logger/issues"
+  },
+  "homepage": "https://github.com/adamryvola/cloud-logger#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
