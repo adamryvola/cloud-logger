@@ -34,9 +34,9 @@ class Logger {
 const logger = new Logger();
 console.log(' =>> Cloud-logger initialized <<=');
 
-module.exports.logger = logger;
 module.exports = (connection, options) => {
     logger.connection = connection;
     logger.options = options;
     return logger;
 };
+module.exports.logger = logger;
