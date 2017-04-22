@@ -1,6 +1,17 @@
 'use strict';
 
+const request = require('request');
+
+/**
+ * Log levels
+ *
+ * 1 - cloud
+ * 2 - console
+ * 3 - cloud and console
+ */
+
 class Logger {
+
     constructor(connection='', options={}) {
         this.connection = connection;
         this.options = options;
@@ -20,7 +31,14 @@ class Logger {
 
     cloud(data) {
         if (this.connection !== '') {
-            //TODO -> send to cloud
+            request.post(this.connection, data, (err, res, body) => {
+                if (err) {
+                    console.log('ERR ON POST LOG', err);
+                } else {
+                    console.log('SUCCESS POST LOG');
+                }
+
+            })
         } else {
             console.warn('Cloud logger -> no cloud connection');
         }
@@ -28,6 +46,7 @@ class Logger {
 
     requestMiddleware(req, res, next) {
         console.log('Request-logger middleware');
+        next();
     }
 }
 
