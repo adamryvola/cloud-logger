@@ -31,7 +31,7 @@ class Logger {
 
     cloud(data) {
         if (this.connection !== '') {
-            request.post(this.connection, data, (err, res, body) => {
+            request.post({uri:this.connection, json:true}, data, (err, res, body) => {
                 if (err) {
                     console.log('ERR ON POST LOG', err);
                 } else {
