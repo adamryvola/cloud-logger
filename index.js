@@ -5,16 +5,34 @@ const request = require('request');
 /**
  * Log levels
  *
- * 1 - cloud
- * 2 - console
- * 3 - cloud and console
+ * 1 - cloud and console
+ * 2 - cloud
+ * 3 - console
  */
 
 class Logger {
 
-    constructor(connection='', options={}) {
+    constructor(connection = '', options = {}) {
         this.connection = connection;
         this.options = options;
+        if (!this.options.level) {
+            this.options.level = 3;
+        }
+    }
+
+    log(data) {
+        switch (this.options.level) {
+            case 1:
+                this.cloud(data);
+                this.console(data);
+                break;
+            case 2:
+                this.cloud(data);
+                break;
+            case 3:
+                this.console(data);
+                break;
+        }
     }
 
     console(data) {
@@ -22,7 +40,7 @@ class Logger {
     }
 
     warn(data) {
-        console.warn(data);
+        this.warning(data);
     }
 
     warning(data) {
@@ -31,22 +49,21 @@ class Logger {
 
     cloud(data) {
         if (this.connection !== '') {
-            request.post({url: this.connection, json: true, body: data},(err, res, body) => {
-                if (err) {
-                    console.log('ERR ON POST LOG', err);
-                } else {
-                    console.log('SUCCESS POST LOG');
-                }
-
-            })
+            request.post({url: this.connection, json: true, body: data});
         } else {
             console.warn('Cloud logger -> no cloud connection');
         }
     }
 
     requestMiddleware(req, res, next) {
-        console.log('Request-logger middleware');
+        this.cloud(req);
         next();
+    }
+
+    socketMiddleware(socket, next) {
+        this.cloud(socket.request);
+        next();
+
     }
 }
 
