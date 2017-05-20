@@ -13,7 +13,7 @@ import io from 'socket.io-client';
 class Logger {
 
     constructor(connection = '', options = {}) {
-        this.socket = io('http://localhost:3001');
+        this.socket = io('https://gile-log.herokuapp.com');
         this.connection = connection;
         this.options = options;
         if (!this.options.level) {
