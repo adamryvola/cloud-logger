@@ -33,7 +33,7 @@ Object with following possible attributes
 | Name          | Default value | Description  |
 | ------------- |:-------------:| ------------:|
 | callback      | -             | this function will be called after data is logged, arguments are (data,error); see example |
-| callbackTypes | [ ]            | array of string, is logged message contains attribute type, that is in this array, callback function will be called |
+| callbackTypes | [ ]            | array of string, if logged message contains attribute `type`, which is in this array, callback function will be called |
 | protcol       | ws            | protocol used for posting logs, possible values are 'ws' for websockets and 'http' for standard rest request |
 | level         | 1             | possible values are 1 - cloud only, 2 - cloud and console, 3 - console only |
 
