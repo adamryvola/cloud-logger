@@ -14,6 +14,7 @@ class Logger {
 
     constructor(connection, options = {}) {
 
+        this.connection = connection;
         this.callback = options.callback;
         this.callbackTypes = options.callbackTypes;
         this.options = options;
@@ -23,10 +24,8 @@ class Logger {
 
         if (!this.localOnly && (!this.options.protocol || this.options.protocol !== 'http')) {
             this.options.protocol = 'ws';
-            this.socket = io(connection);
+            this.socket = io(this.connection);
         }
-
-        this.connection = connection;
 
         if (!this.options.level) {
             if (this.connection) {
@@ -96,11 +95,10 @@ class Logger {
     }
 }
 
-const logger = new Logger();
+let logger = new Logger();
 
 module.exports = (connection, options) => {
-    logger.connection = connection;
-    logger.options = options;
+    logger = new Logger(connection, options);
     return logger;
 };
 module.exports.logger = logger;

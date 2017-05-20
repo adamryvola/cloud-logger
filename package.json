@@ -1,6 +1,6 @@
 {
   "name": "cloud-logger",
-  "version": "0.0.9",
+  "version": "0.0.12",
   "description": "Send and save your logs in cloud.",
   "main": "index.js",
   "engines": {
