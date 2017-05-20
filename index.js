@@ -74,7 +74,7 @@ class Logger {
     cloud(data) {
         if (this.options.protocol === 'http') {
             if (this.connection !== '') {
-                request.post({url: this.connection, json: true, body: data});
+                request.post({url: this.connection+'/logs', json: true, body: data});
             } else {
                 console.warn('Cloud logger -> no cloud connection for http post request');
             }
