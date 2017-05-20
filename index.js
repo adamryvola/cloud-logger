@@ -1,6 +1,6 @@
 'use strict';
-
 const request = require('request');
+import io from 'socket.io-client';
 
 /**
  * Log levels
@@ -13,6 +13,7 @@ const request = require('request');
 class Logger {
 
     constructor(connection = '', options = {}) {
+        this.socket = io('http://localhost:3001');
         this.connection = connection;
         this.options = options;
         if (!this.options.level) {
@@ -48,11 +49,14 @@ class Logger {
     }
 
     cloud(data) {
+        /*
         if (this.connection !== '') {
             request.post({url: this.connection, json: true, body: data});
         } else {
             console.warn('Cloud logger -> no cloud connection');
         }
+        */
+        this.socket.emit('POST_LOG', {client: 'zadek', message: 'muj prvni log'});
     }
 
     requestMiddleware(req, res, next) {
